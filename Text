@@ -1,0 +1,138 @@
+#XPATH:
+To create any xpath format is //tagname[@attribute='value']
+if the html code is <input class="btn btn-success" type="submit" value="Submit">
+then we can create xpath "//input[@type='submit']"
+Note: If there are multiple element with same xpath then
+     suppose 3 elements are there with same xpath and you want 3rd one then
+     (//tagname[@attribute='value'])[3] it will hit the 3rd one
+
+__________________________________________________________________________________
+#XPATH when no attribute is given - have to travel from parent to child:
+format is
+<form _ngcontent-kod-c46="" novalidate="" class="ng-pristine ng-invalid ng-touched">
+<div _ngcontent-kod-c46="" class="form-group mt-2 mb-2"><label _ngcontent-kod-c46="" for="userEmail" class="mt-1">Email</label>
+    <input _ngcontent-kod-c46="" type="email" formcontrolname="userEmail" placeholder="Enter your email address" class="form-control form-control-sm ng-pristine ng-invalid ng-touched"><!----></div>
+<div _ngcontent-kod-c46="" class="form-group"><label _ngcontent-kod-c46="" for="password">Password</label>
+    <input _ngcontent-kod-c46="" type="password" formcontrolname="userPassword" id="userPassword" placeholder="Passsword" class="form-control ng-untouched ng-pristine ng-invalid"><!----></div>
+<div _ngcontent-kod-c46="" class="form-group"><label _ngcontent-kod-c46="" for="confirmPassword">Confirm Password</label>
+    <input _ngcontent-kod-c46="" type="password" formcontrolname="confirmPassword" id="confirmPassword" placeholder="Confirm Passsword" class="form-control ng-untouched ng-pristine ng-invalid"><!----></div>
+<div _ngcontent-kod-c46="" class="d-flex justify-content-center"><button _ngcontent-kod-c46="" type="submit" class="btn btn-custom btn-block" style="background-color: #96161f; color: white;">Save New Password</button></div>
+<div _ngcontent-kod-c46="" class="d-flex justify-content-center"><a _ngcontent-kod-c46="" class="text-reset" href="/client/auth/login">Login</a> &nbsp; &nbsp; <a _ngcontent-kod-c46="" class="text-reset" href="/client/auth/register">Register</a></div></form>
+
+In above form form is parent and div's are child.
+Then the xpath wil be for input for div 1 is
+//form/div[1]/input (for enter mail id)
+
+__________________________________________________________________________________
+
+#XPATH based on text
+//button[text()='PROCEED TO CHECKOUT']
+from html
+<button type="button" class=" " xpath="1">PROCEED TO CHECKOUT</button>
+__________________________________________________________________________________
+#XPATH when no attribute is given only text is present:
+then we will create xpath by using
+<button _ngcontent-kod-c46="" type="submit" class="btn btn-custom btn-block" style="background-color: #96161f;
+color: white;">Save New Password</button>
+
+//button[text()='Save New Password']     (xpath using text)
+__________________________________________________________________________________
+#CSS SELECTOR:
+To create any css selector format is tagname[attribute='value']
+if the html code is <input class="btn btn-success" type="submit" value="Submit">
+then we can create css selector "input[type='submit']"
+note: #id will turnout to be css selector ex- #radiobutton
+      .class name will turnout to be css selector ex- .alert-success
+__________________________________________________________________________________
+#CSS SELECTOR  when no attribute is given - have to travel from parent to child:
+format is
+<form _ngcontent-kod-c46="" novalidate="" class="ng-pristine ng-invalid ng-touched">
+<div _ngcontent-kod-c46="" class="form-group mt-2 mb-2"><label _ngcontent-kod-c46="" for="userEmail" class="mt-1">Email</label>
+    <input _ngcontent-kod-c46="" type="email" formcontrolname="userEmail" placeholder="Enter your email address" class="form-control form-control-sm ng-pristine ng-invalid ng-touched"><!----></div>
+<div _ngcontent-kod-c46="" class="form-group"><label _ngcontent-kod-c46="" for="password">Password</label>
+    <input _ngcontent-kod-c46="" type="password" formcontrolname="userPassword" id="userPassword" placeholder="Passsword" class="form-control ng-untouched ng-pristine ng-invalid"><!----></div>
+<div _ngcontent-kod-c46="" class="form-group"><label _ngcontent-kod-c46="" for="confirmPassword">Confirm Password</label>
+    <input _ngcontent-kod-c46="" type="password" formcontrolname="confirmPassword" id="confirmPassword" placeholder="Confirm Passsword" class="form-control ng-untouched ng-pristine ng-invalid"><!----></div>
+<div _ngcontent-kod-c46="" class="d-flex justify-content-center"><button _ngcontent-kod-c46="" type="submit" class="btn btn-custom btn-block" style="background-color: #96161f; color: white;">Save New Password</button></div>
+<div _ngcontent-kod-c46="" class="d-flex justify-content-center"><a _ngcontent-kod-c46="" class="text-reset" href="/client/auth/login">Login</a> &nbsp; &nbsp; <a _ngcontent-kod-c46="" class="text-reset" href="/client/auth/register">Register</a></div></form>
+
+In above form form is parent and div's are child.
+Then the xpath wil be for input for div 2 is
+form div:nth-child(2) input (for enter password) (just like xpath only have to remove / and give space)
+
+__________________________________________________________________________________
+#DROPDOWN for Static dropdown
+first we have to import Select class,
+then make a variable for dropdown id
+then  dropdown.select_by_index(1) or value or visible text
+
+dropdown = Select(driver.find_element(By.ID,"exampleFormControlSelect1"))
+dropdown.select_by_index(1)
+
+__________________________________________________________________________________
+#DROPDOWN for Dynamic dropdown
+If option are changing as per the prompt
+After giving 'Ind' 3 option appears
+Take attribute of all the option:
+options are like below->
+<li class="ui-menu-item" role="presentation" css="1" style=""><a id="ui-id-90" class="ui-corner-all" tabindex="-1">British Indian Ocean Territory</a></li>
+
+create css selector for common elements
+driver.find_elements(By.CSS_SELECTOR, "li[class='ui-menu-item']")
+
+then extract the text and itterate from for loop for the desired prompt
+__________________________________________________________________________________
+#To get text of manual input
+we can't use .text (it will work for inbuilt html)
+
+we have to use .get_attribute("value")
+__________________________________________________________________________________
+
+#IMPLICIT WAIT
+Implicit wait is global wait
+We have to apply after declaring driver.
+It will wait for every element to load for the specific time we gave.
+driver.implicitly_wait(5)
+
+Note: Implicit wait not works for find_elements
+__________________________________________________________________________________
+
+#MOUSE HOVER
+For every method we have to use .perform at last.
+
+__________________________________________________________________________________
+#CHILD WINDOW
+Switch to different window by
+driver.window_handles (return all the window handles)
+driver.switch_to.window(windowsopened[1]) (switch to particular window by index of handles)
+
+__________________________________________________________________________________
+#Frames
+To switch any frame we have to use driver.switch_to.frame("mce_0_ifr") #passing id
+
+To work outside of the frame we have to come out first from the current frame by using
+driver.switch_to.default_content()
+
+
+__________________________________________________________________________________
+#MISCELLANOUS
+There are soo many js which we can use in selenium to scroll i selenium
+
+            #Scroll
+window.scrollBy(0,100)   it will scroll lil bit
+window.scrollBy(0,document.body.scrollHeight)
+ex - driver.execute_script(window.scrollBy(0,document.body.scrollHeight))
+
+            #Screenshot
+driver.get_screenshot_as_file("image.png")
+
+__________________________________________________________________________________
+#BROWSER_LESS TESTING
+
+Here chrome will execute in backend --- headless
+
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument("headless")
+
+
+chrome_options.add_argument("--ignore-certificate-errors") # will ignore the certificates
