@@ -136,3 +136,129 @@ chrome_options.add_argument("headless")
 
 
 chrome_options.add_argument("--ignore-certificate-errors") # will ignore the certificates
+__________________________________________________________________________________
+#EXPLICIT WAIT
+Explicit wait is a conditional wait
+
+#wait untill India appears in suggestion
+wait = WebDriverWait(driver,10)
+wait.until(expected_conditions.presence_of_element_located((By.LINK_TEXT,"India")))
+
+#select india from suggestion
+driver.find_element(By.LINK_TEXT,"India").click
+__________________________________________________________________________________
+#LOGS
+
+Debug
+Info
+Warning
+Error
+Critical
+__________________________________________________________________________________
+
+If working for pytest then :-
+
+Creation of python file must be started with test_ or end with _test
+Pytest method should start with test
+Any code should be wrapped in method only
+__________________________________________________________________________________
+
+
+#To run pytest in terminal
+cd your pytest folder path
+py.test (will run all the test cases)
+__________________________________________________________________________________
+
+#Test case name == Method name
+__________________________________________________________________________________
+
+#from terminal execution -
+-k stand for method name execution, -s logd in output, -v stands for more info metadata
+__________________________________________________________________________________
+
+# you can run specific file
+py.test <filename>
+__________________________________________________________________________________
+#@pytest.mark.xfail
+it will run without log
+__________________________________________________________________________________
+
+#you can mark tests @pytest.mark.smoke and then run with -m
+__________________________________________________________________________________
+
+#to skip any test case @pytest.mark.skip
+__________________________________________________________________________________
+
+#fixture
+we can use fixture in every script by calling
+
+
+@pytest.fixture()
+annotation which will execute after and before test.
+
+EX-
+@pytest.fixture()
+def setup():
+    print("I will execute first")
+
+
+def test_fixtureDemo(setup):
+    print("I will execute steps")
+
+
+above @pytest.fixture()
+will execute first then 2nd method as we have passed setup in wnd method that setup is fixture
+__________________________________________________________________________________
+
+#YIELD
+If we apply apply yield then whatever  method is after YIELD
+will execute at last.
+EX-
+@pytest.fixture()
+def setup():
+    print("I will execute first")     #will execute first
+    YIELD
+    print("I will execute last")    #will execute at last
+
+def test_fixtureDemo(setup):
+    print("I will execute steps")    #will execute second
+__________________________________________________________________________________
+IF yoy are going to use fixture many times in your code then
+
+put fixture in on file called "conftest.py"
+and call that fixture in very code which is inside pytest folder.
+
+__________________________________________________________________________________
+
+Use fixture for soo many test cases:
+
+@pytest.mark.usefixture(setup)
+class Testexapmle:
+
+    def test_fixtureDemo(self):
+    print("I will execute steps")
+
+    def test_fixtureDemo1(self):
+    print("I will execute steps1")
+
+    def test_fixtureDemo2(self):
+    print("I will execute steps2")
+
+
+
+it will give output like:
+
+I will execute first
+I will execute steps2
+I will execute last
+__________________________________________________________________________________
+#EXCEL READ and WRITE
+
+Get openpyxl package
+terminal pip install openpyxl
+
+-import openpyxl
+-book = openpyxl.load_workbook("path")
+-sheet = book.active
+-cell = sheet.cell
+-print(cell.value)
